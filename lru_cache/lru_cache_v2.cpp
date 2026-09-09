@@ -1,4 +1,6 @@
-#include <bits/stdc++.h>
+#include <list>
+#include <unordered_map>
+#include <iostream>
 using namespace std;
 
 class LRUCache{
@@ -35,3 +37,17 @@ class LRUCache{
         }
     }
 };
+
+int main(){
+    LRUCache cache(3);
+    cache.put(5, 2);
+    cache.put(8, 3);
+    cache.put(8, 2);
+    cache.put(9, 3);
+    cout << cache.get(4) << "\n";
+    cache.get(8);
+    cache.put(3,5);
+    cache.put(3,9);
+    cout << cache.get(3) << "\n";
+    cout << cache.get(5) << "\n";
+}
