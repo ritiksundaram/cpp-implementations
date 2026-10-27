@@ -87,6 +87,33 @@ class Vector{
     size_t capacity() const{
         return cap;
     }
+    T& operator[](size_t i){
+        return buf[i]; 
+    }
+    const T& operator[](size_t i) const{
+        return buf[i];
+    }
+    bool pop_back(){
+        if (cur==0){
+            return false;
+        }
+        cur--;
+        return true;
+    }
+    bool empty() const{
+        return cur==0;
+    }
+    void reserve(size_t n){
+        if (n>cap){
+            cap = n;
+            T* newBuf = new T[cap];
+            for (size_t i=0; i<cur; i++){
+                newBuf[i] = buf[i];
+            }
+            delete[] buf;
+            buf = newBuf;
+        }
+    }
 };
 
 int main(){
@@ -110,4 +137,11 @@ int main(){
     b.push_back(5);
     b = std::move(a);
     std::cout << b.size() << " " << a.size() << "\n";
+    Vector<int> r(2);
+    r.reserve(50);
+    r.push_back(1);
+    r[0] = 42;
+    std::cout << r[0] << " " << r.size() << " " << r.capacity() << " " << r.empty() << "\n";
+    r.pop_back();
+    std::cout << r.size() << " " << r.empty() << "\n";
 }
